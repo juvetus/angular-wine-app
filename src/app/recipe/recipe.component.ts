@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Recipe} from './recipe.model'
 
 
 @Component({
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./recipe.component.css']
 })
 export class RecipeComponent {
+  selectedRecipe: Recipe;
 
 }
