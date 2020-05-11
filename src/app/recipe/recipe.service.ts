@@ -32,6 +32,9 @@ export class RecipeService {
     getRecipes() {
       return this.recipes.slice(); //dont want to return the original array ,only copys
       }
+    getRecipeById(id:number){
+      return this.recipes[id];
+    }  
       
       addIngredientsToShoppingList(ingredients: Ingredient[]) {
         this.shoppinglistService.addIngredients(ingredients);
