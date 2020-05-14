@@ -56,7 +56,6 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onDeleteIngredient(i:number){
-    window.alert('hey');
     (<FormArray>this.newRecipeForm.get('ingredients')).removeAt(i);
     }
 
