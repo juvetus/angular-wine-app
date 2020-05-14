@@ -12,9 +12,7 @@ import { Ingredient } from 'src/app/shared/ingredient.model';
 export class RecipeEditComponent implements OnInit {
   editmode : boolean = false;
   recipe_id : number;
-
   newRecipeForm:FormGroup;
-
 
   get ingredientsControls() {
     return (this.newRecipeForm.get('ingredients') as FormArray).controls;
@@ -36,7 +34,7 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.newRecipeForm.value)
+    console.log(this.newRecipeForm)
     if (this.editmode) {
       this.recipeService.updateRecipe(this.recipe_id, this.newRecipeForm.value);
     } else {
@@ -58,15 +56,14 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onDeleteIngredient(i:number){
+    window.alert('hey');
     (<FormArray>this.newRecipeForm.get('ingredients')).removeAt(i);
     }
 
   onCancel(){
     this.router.navigate(['../'], {relativeTo: this.route});
-
   }
   
-
   private generateForm(){
     let recipeName;
     let recipeImgPath;
@@ -91,11 +88,8 @@ export class RecipeEditComponent implements OnInit {
               ])
           })
         );
-        
         }
       }
-
-      
     }
     
     this.newRecipeForm = new FormGroup({
@@ -105,7 +99,4 @@ export class RecipeEditComponent implements OnInit {
       ingredients:recipeIngredients
     });
   }
-
-
-
 }

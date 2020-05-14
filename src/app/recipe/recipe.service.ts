@@ -5,13 +5,12 @@ import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
-
-
 @Injectable()
 export class RecipeService {
+
   recipesChanged = new Subject<Recipe[]>();
 
-    private recipes: Recipe[] = [
+  private recipes: Recipe[] = [
       new Recipe(
         'Tasty Schnitzel',
         'A super-tasty Schnitzel - just awesome!',
@@ -29,7 +28,7 @@ export class RecipeService {
         ])
     ];
 
-    constructor(private shoppinglistService: ShoppingListService) {}    
+  constructor(private shoppinglistService: ShoppingListService) {}    
 
     getRecipes() {
       return this.recipes.slice(); //dont want to return the original array ,only copys
