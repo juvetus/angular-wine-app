@@ -9,9 +9,22 @@ export class BackendService{
 
     storeRecipe(){
         const recipes = this.recipeService.getRecipes();
-        this.http.put('https://recipeapp-c6b15.firebaseio.com/recipes.json',recipes).subscribe(
+        this.http.put(
+            'https://recipeapp-c6b15.firebaseio.com/recipes.json',
+            recipes).subscribe(
             res => {
                 console.log(res);
+            }
+        );
+
+    }
+
+    fetchRecipe(){
+        this.http.get<Recipe[]>(
+            'https://recipeapp-c6b15.firebaseio.com/recipes.json'
+            ).subscribe(
+            res=>{
+                this.recipeService.setFetchedRecipes(res);
             }
         );
 

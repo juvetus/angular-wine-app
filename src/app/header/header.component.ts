@@ -10,8 +10,10 @@ export class HeaderComponent{
     constructor( private backendService : BackendService){}
 
     onSave(){
-        this.backendService.storeRecipe()
-        
+        this.backendService.storeRecipe();
+    }
+    onFetch(){
+        this.backendService.fetchRecipe();
     }
 
 }
