@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Recipe } from '../recipe/recipe.model';
 import { RecipeService } from '../recipe/recipe.service';
-import { map } from 'rxjs/operators';
+import { map,tap } from 'rxjs/operators';
 
 
 
@@ -23,7 +23,7 @@ export class BackendService{
     }
 
     fetchRecipe(){
-        this.http.get<Recipe[]>(
+       return this.http.get<Recipe[]>(
             'https://recipeapp-c6b15.firebaseio.com/recipes.json'
             ).pipe(map(recipes =>{
                 return recipes.map(recipe =>{
@@ -32,13 +32,9 @@ export class BackendService{
                         ingredients: recipe.ingredients ? recipe.ingredients :[]
                     }
                 });
-            })    
-            ).subscribe(
-            res=>{
+            }),tap(res=>{
                 this.recipeService.setFetchedRecipes(res);
-            }
+            })    
         );
-
     }
-
 }

@@ -13,7 +13,7 @@ export class HeaderComponent{
         this.backendService.storeRecipe();
     }
     onFetch(){
-        this.backendService.fetchRecipe();
+        this.backendService.fetchRecipe().subscribe();
     }
 
 }
