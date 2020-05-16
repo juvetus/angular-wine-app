@@ -1,18 +1,37 @@
 <div class="row">
     <div class="col-xs-12 col-md-6 col-offset-3">
-        <div class="form">
+        <form #f="ngForm" (ngSubmit)="onAuthFormSubmit(f)">
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" class="form-control">
+                <input 
+                type="email"
+                 id="email"
+                  class="form-control"
+                  
+                  ngModel
+                  name="email"
+                  required
+                  email>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" class="form-control">
+                <input 
+                type="password"
+                 id="password"
+                  class="form-control"
+                  ngModel
+                  name="password"
+                  required
+                  minlength="6"
+                  >
             </div>
             <div>
-                <button class="btn btn-primary" type="submit">{{ logInMode ? 'Log-In' : 'Sign UP'}}</button> |
+                <button 
+                class="btn btn-primary"
+                 type="submit"
+                 [disabled]="!f.valid">{{ logInMode ? 'Log-In' : 'Sign UP'}}</button> |
                 <button class="btn btn-primary"(click)="switchAuthMode()">switch to {{ !logInMode ? 'Log-in' : 'Sign-up'}} </button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
