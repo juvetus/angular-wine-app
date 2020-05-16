@@ -30,9 +30,9 @@ export class AuthComponent{
             this.authService.signUp(email,password).subscribe(res=>{
                 this.isLoading = false;
                 console.log(res);
-            },err=>{
+            },defErrorMsg=>{
                 this.isLoading = false;
-                this.error = err;
+                this.error = defErrorMsg
             });
         }
         authForm.reset();

@@ -4,7 +4,7 @@
             <app-loading></app-loading>
         </div>
         <div *ngIf = "error" class="alert alert-danger">
-            <p> an error occured</p>
+            <p> {{ error }}</p>
         </div>
         <form #f="ngForm" (ngSubmit)="onAuthFormSubmit(f)" *ngIf = "!isLoading">
             <div class="form-group">
