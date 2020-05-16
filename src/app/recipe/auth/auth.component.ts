@@ -19,11 +19,11 @@ export class AuthComponent{
 
     onAuthFormSubmit(authForm : NgForm){
 
-        this.isLoading = true;
         if (authForm.invalid){ return ;}
 
         const email = authForm.value.email;
         const password = authForm.value.password;
+        this.isLoading = true;
         if(this.logInMode){
 
         }else{
