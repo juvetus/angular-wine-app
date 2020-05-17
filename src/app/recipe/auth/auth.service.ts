@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import { HttpClient, HttpErrorResponse} from '@angular/common/http'
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
-import { User} from './user.model'
+import { User} from './user.model';
+import { Router } from '@angular/router';
 
 export interface AuthResponse{
     idToken:string,
@@ -16,7 +17,10 @@ export interface AuthResponse{
 @Injectable({providedIn : 'root'})
 export class AuthService{
 
-    constructor(private http:HttpClient){}
+    private sessoionTimer:any;
+
+    constructor(private http:HttpClient,
+        private router: Router){}
 
     user = new BehaviorSubject<User>(null); //allow access to previous and current token emitted
 
@@ -60,6 +64,18 @@ export class AuthService{
 
     logOut(){
         this.user.next(null);
+        this.router.navigate(['/auth']);
+        localStorage.removeItem('userData');
+        if(this.sessoionTimer){
+            clearTimeout(this.sessoionTimer);
+        }
+        this.sessoionTimer =  null;
+    }
+
+    autoLogout(tokenExpirePeriod:number){
+        this.sessoionTimer = setTimeout(() => {
+            this.logOut();            
+        }, tokenExpirePeriod);
     }
 
     autoLogin(){
@@ -82,6 +98,9 @@ export class AuthService{
         
         if(loggedUser.token){
             this.user.next(loggedUser);
+
+            const newExpPeriod = new Date(userData._tokenExpirePeriod).getTime() - new Date().getTime();
+            this.autoLogout(newExpPeriod);
         }    
     }
 
@@ -98,7 +117,8 @@ export class AuthService{
             localId,
             idToken,
             expirationPeriod);
-        this.user.next(user); 
+        this.user.next(user);
+        this.autoLogout(expiresIn*1000); 
         localStorage.setItem('userData', JSON.stringify(user)); 
     }
 
