@@ -24,6 +24,7 @@ import { RecipeBeginComponent } from './recipe/recipe-begin/recipe-begin.compone
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
 import { AuthComponent } from './recipe/auth/auth.component';
 import { AlertComponent } from './shared/alert/alert.component';
+import { PlaceHolderDirective } from './shared/placeholder/placeholder.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { AlertComponent } from './shared/alert/alert.component';
     RecipeEditComponent,
     AuthComponent,
     LoadingSpinner,
-    AlertComponent
+    AlertComponent,
+    PlaceHolderDirective
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,7 @@ import { AlertComponent } from './shared/alert/alert.component';
     useClass:AuthIntercepterService,
     multi:true}],
     
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[AlertComponent]
 })
 export class AppModule { }
