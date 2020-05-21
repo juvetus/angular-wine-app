@@ -23,6 +23,7 @@ import { LoadingSpinner } from './shared/loading-spinner/loading.component';
 import { RecipeBeginComponent } from './recipe/recipe-begin/recipe-begin.component';
 import { RecipeEditComponent } from './recipe/recipe-edit/recipe-edit.component';
 import { AuthComponent } from './recipe/auth/auth.component';
+import { AlertComponent } from './shared/alert/alert.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { AuthComponent } from './recipe/auth/auth.component';
     RecipeBeginComponent,
     RecipeEditComponent,
     AuthComponent,
-    LoadingSpinner
+    LoadingSpinner,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
