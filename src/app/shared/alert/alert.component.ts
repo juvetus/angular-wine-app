@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 
 @Component({
     selector: 'app-alert',
@@ -7,5 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AlertComponent{
     @Input() alertMessage;
+    @Output() hideAlert = new EventEmitter<void>();
 
+    closeAlert(){
+        this.hideAlert.emit();       
+    }
 }

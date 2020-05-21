@@ -19,6 +19,9 @@ export class AuthComponent{
     switchAuthMode(){
         this.logInMode = !this.logInMode;
     }
+    handleAlertBox(){
+        this.error = null;
+    }
 
     onAuthFormSubmit(authForm : NgForm){
 
