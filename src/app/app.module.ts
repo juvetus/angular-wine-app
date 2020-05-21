@@ -8,9 +8,8 @@ import { RecipeModule } from "./recipe/recipe.module";
 import { AppComponent } from './app.component';
 import { AppRouteModule } from './app-router.module';
 import { HeaderComponent } from './header/header.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component'
 import { AuthIntercepterService} from './recipe/auth/auth-interceptor.service'
+import { ShoppingListModule } from "./shopping-list/shopping-list-module";
 
 import { RecipeService } from './recipe/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
@@ -23,8 +22,6 @@ import { PlaceHolderDirective } from './shared/placeholder/placeholder.directive
   declarations: [
     AppComponent,
     HeaderComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
     DropdownDirective,
     AuthComponent,
     LoadingSpinner,
@@ -37,7 +34,8 @@ import { PlaceHolderDirective } from './shared/placeholder/placeholder.directive
     ReactiveFormsModule,
     HttpClientModule,
     AppRouteModule,
-    RecipeModule
+    RecipeModule,
+    ShoppingListModule
   ],
   providers: [ShoppingListService, RecipeService,{ 
     provide:HTTP_INTERCEPTORS,
