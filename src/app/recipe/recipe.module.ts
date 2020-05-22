@@ -10,14 +10,15 @@ import { RecipeBeginComponent } from './recipe-begin/recipe-begin.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipeComponent } from './recipe.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
     imports: [
         RouterModule,
-        CommonModule,
         ReactiveFormsModule,
-        RecipeRoutesModule
+        RecipeRoutesModule,
+        SharedModule
     ],
     exports: [ ],
     declarations: [

@@ -13,20 +13,15 @@ import { ShoppingListModule } from "./shopping-list/shopping-list-module";
 
 import { RecipeService } from './recipe/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
-import { DropdownDirective } from './shared/dropdown.directive';
-import { LoadingSpinner } from './shared/loading-spinner/loading.component';
 import { AuthComponent } from './recipe/auth/auth.component';
 import { AlertComponent } from './shared/alert/alert.component';
-import { PlaceHolderDirective } from './shared/placeholder/placeholder.directive';
+import { SharedModule } from './shared/shared.module';
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    DropdownDirective,
-    AuthComponent,
-    LoadingSpinner,
-    AlertComponent,
-    PlaceHolderDirective
+    AuthComponent
   ],
   imports: [
     BrowserModule,
@@ -35,14 +30,14 @@ import { PlaceHolderDirective } from './shared/placeholder/placeholder.directive
     HttpClientModule,
     AppRouteModule,
     RecipeModule,
-    ShoppingListModule
+    ShoppingListModule,
+    SharedModule
   ],
   providers: [ShoppingListService, RecipeService,{ 
     provide:HTTP_INTERCEPTORS,
     useClass:AuthIntercepterService,
     multi:true}],
     
-  bootstrap: [AppComponent],
-  entryComponents:[AlertComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
