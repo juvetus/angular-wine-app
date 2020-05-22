@@ -19,10 +19,8 @@ import { CoreModule } from "./core.module";
     BrowserModule,
     HttpClientModule,
     AppRouteModule,
-    ShoppingListModule,
     SharedModule,
     CoreModule,
-    AuthModule
   ],
   providers: [],
     
