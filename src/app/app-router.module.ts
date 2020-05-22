@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { AuthComponent } from './recipe/auth/auth.component';
-
 const routes : Routes =[
     {path: '', redirectTo : '/recipes', pathMatch:'full'},
+    {path:'recipes', loadChildren: ()=> (import('./recipe/recipe.module').then(
+        mdl => mdl.RecipeModule
+    ))}
 ];
 
 @NgModule({
