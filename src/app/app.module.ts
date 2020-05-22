@@ -10,26 +10,24 @@ import { AppRouteModule } from './app-router.module';
 import { HeaderComponent } from './header/header.component';
 import { ShoppingListModule } from "./shopping-list/shopping-list-module";
 
-import { AuthComponent } from './recipe/auth/auth.component';
+import { AuthModule } from './recipe/auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from "./core.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    AuthComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     AppRouteModule,
     RecipeModule,
     ShoppingListModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    AuthModule
   ],
   providers: [],
     
