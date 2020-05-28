@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertComponent } from 'src/app/shared/alert/alert.component';
 import { PlaceHolderDirective } from '../../shared/placeholder/placeholder.directive';
+import { BackendService } from '../../shared/firebase.service';
 
 
 @Component({
@@ -22,7 +23,9 @@ export class AuthComponent implements OnDestroy{
 
     constructor(private authService : AuthService,
         private router: Router,
-        private compFacRes : ComponentFactoryResolver){}
+        private compFacRes : ComponentFactoryResolver,
+        private backendService : BackendService,
+        ){}
 
     switchAuthMode(){
         this.logInMode = !this.logInMode;
@@ -54,6 +57,10 @@ export class AuthComponent implements OnDestroy{
         
     }
 
+    private autoLoadList(){
+          this.backendService.fetchRecipe().subscribe();
+    }
+
     onAuthFormSubmit(authForm : NgForm){
 
         if (authForm.invalid){ return ;}
@@ -67,12 +74,13 @@ export class AuthComponent implements OnDestroy{
         if(this.logInMode){
             authObservable = this.authService.signIn(email,password);
         }else{
-            authObservable= this.authService.signUp(email,password)
+            authObservable= this.authService.signUp(email,password);
         }
 
         authObservable.subscribe(res=>{
             this.isLoading = false;
-            this.router.navigate(['/recipes'])
+            this.router.navigate(['/recipes']);
+            this.autoLoadList();
         },defErrorMsg=>{
             this.isLoading = false;
             this.error = defErrorMsg;
