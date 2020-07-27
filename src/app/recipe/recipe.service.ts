@@ -1,9 +1,10 @@
 import { Subject } from 'rxjs/';
 import { Injectable} from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import * as ShoppingListActions from '../shopping-list/store/shopping-list.actions';
 
 @Injectable()
 export class RecipeService {
@@ -12,7 +13,9 @@ export class RecipeService {
 
   private recipes: Recipe[] = [];
 
-  constructor(private shoppinglistService: ShoppingListService) {}    
+  constructor(
+    private store: Store<{ shoppingList: { ingredients: Ingredient[] } }>
+    ) {}    
 
     getRecipes() {
       return this.recipes.slice(); //dont want to return the original array ,only copys
@@ -22,7 +25,7 @@ export class RecipeService {
     }
     
     addIngredientsToShoppingList(ingredients: Ingredient[]) {
-      this.shoppinglistService.addIngredients(ingredients);
+      this.store.dispatch(new ShoppingListActions.AddIngredients(ingredients));
       }
 
     addRecipe(recipe: Recipe) {

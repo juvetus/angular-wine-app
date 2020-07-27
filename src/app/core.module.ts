@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { AuthIntercepterService} from './recipe/auth/auth-interceptor.service'
 
 import { RecipeService } from './recipe/recipe.service';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
 import {HTTP_INTERCEPTORS} from '@angular/common/http'
 
 @NgModule({
@@ -10,7 +9,6 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http'
     exports: [],
     declarations: [],
     providers: [
-        ShoppingListService,
         RecipeService,
         { 
         provide:HTTP_INTERCEPTORS,
