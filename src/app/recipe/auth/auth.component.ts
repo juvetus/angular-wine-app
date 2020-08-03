@@ -1,6 +1,6 @@
 import { Component, ComponentFactoryResolver, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService, AuthResponse} from './../auth/auth.service'
+import { AuthService} from './../auth/auth.service'
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -10,7 +10,6 @@ import { PlaceHolderDirective } from '../../shared/placeholder/placeholder.direc
 import { BackendService } from '../../shared/firebase.service';
 import * as fromApp from '../../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
-
 
 
 @Component({
@@ -23,6 +22,7 @@ export class AuthComponent implements OnDestroy{
     error: String;
 
     private alertdynSubs: Subscription;
+    private storeSub: Subscription;
 
     @ViewChild(PlaceHolderDirective,{static:false}) alertHolder :PlaceHolderDirective; 
 
@@ -34,7 +34,7 @@ export class AuthComponent implements OnDestroy{
         ){}
 
         ngOnInit() {
-            this.store.select('auth').subscribe(authState => {
+            this.storeSub = this.store.select('auth').subscribe(authState => {
               this.isLoading = authState.loading;
               this.error = authState.authError;
               if (this.error) {
@@ -47,12 +47,15 @@ export class AuthComponent implements OnDestroy{
         this.logInMode = !this.logInMode;
     }
     handleAlertBox(){
-        this.error = null; 
+        this.store.dispatch(new AuthActions.ClearError()); 
     }
 
     ngOnDestroy(){
         if(this.alertdynSubs){
             this.alertdynSubs.unsubscribe();
+        }
+        if (this.storeSub) {
+            this.storeSub.unsubscribe();
         }
     }
 
@@ -85,15 +88,16 @@ export class AuthComponent implements OnDestroy{
         const password = authForm.value.password;
         this.isLoading = true;
 
-        let authObservable : Observable<AuthResponse>; 
-
+      
         if(this.logInMode){
             //authObservable = this.authService.signIn(email,password);
             this.store.dispatch(
                 new AuthActions.LoginStart({ email: email, password: password })
               );
         }else{
-            authObservable= this.authService.signUp(email,password);
+            this.store.dispatch(
+                new AuthActions.SignupStart({ email: email, password: password })
+              );
         }
 
      /*    authObservable.subscribe(res=>{
