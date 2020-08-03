@@ -7,7 +7,6 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { AlertComponent } from 'src/app/shared/alert/alert.component';
 import { PlaceHolderDirective } from '../../shared/placeholder/placeholder.directive';
-import { BackendService } from '../../shared/firebase.service';
 import * as fromApp from '../../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
 
@@ -29,7 +28,6 @@ export class AuthComponent implements OnDestroy{
     constructor(private authService : AuthService,
         private router: Router,
         private compFacRes : ComponentFactoryResolver,
-        private backendService : BackendService,
         private store: Store<fromApp.AppState>
         ){}
 
@@ -77,7 +75,7 @@ export class AuthComponent implements OnDestroy{
     }
 
     private autoLoadList(){
-          this.backendService.fetchRecipe().subscribe();
+          console.log('autoload')
     }
 
     onAuthFormSubmit(authForm : NgForm){

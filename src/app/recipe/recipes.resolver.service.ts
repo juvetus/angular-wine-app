@@ -2,22 +2,38 @@
 
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Actions, ofType } from '@ngrx/effects';
+import { take, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+
 import { Recipe } from './recipe.model';
-import { BackendService } from '../shared/firebase.service';
-import { RecipeService } from './recipe.service';
+import * as fromApp from '../store/app.reducer';
+import * as RecipesActions from '../recipe/store/recipe.actions';
 
 @Injectable({providedIn:"root"})
 export class RecipesResolver implements Resolve<Recipe[]>{
-    constructor(private backendService : BackendService,
-                private recipeService : RecipeService){}
+    constructor(private store: Store<fromApp.AppState>,
+        private actions$: Actions){}
 
     resolve(route: ActivatedRouteSnapshot, state:RouterStateSnapshot){
         
-        const recipe = this.recipeService.getRecipes();
-        if (recipe.length === 0){
-            return this.backendService.fetchRecipe();
-        }else{
-            return recipe;
-        }
+        return this.store.select('recipes').pipe(
+            take(1),
+            map(recipesState => {
+              return recipesState.recipes;
+            }),
+            switchMap(recipes => {
+              if (recipes.length === 0) {
+                this.store.dispatch(new RecipesActions.FetchRecipes());
+                return this.actions$.pipe(
+                  ofType(RecipesActions.SET_RECIPES),
+                  take(1)
+                );
+              } else {
+                return of(recipes);
+              }
+            })
+          );
     }
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
-import { BackendService } from '../shared/firebase.service';
 import { AuthService } from '../recipe/auth/auth.service';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -7,6 +6,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from '../recipe/auth/store/auth.actions';
+import * as RecipeActions from '../recipe/store/recipe.actions';
 
 
 @Component({
@@ -18,8 +18,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
     isAuthenticated: boolean = false;
     collapsed = true;
 
-    constructor( private backendService : BackendService,
-                 private authService: AuthService,
+    constructor( private authService: AuthService,
                  private store: Store<fromApp.AppState>){}
 
      ngOnInit(){
@@ -34,10 +33,10 @@ export class HeaderComponent implements OnInit, OnDestroy{
      }            
 
     onSave(){
-        this.backendService.storeRecipe();
+        this.store.dispatch(new RecipeActions.StoreRecipes());
     }
     onFetch(){
-        this.backendService.fetchRecipe().subscribe();
+        this.store.dispatch(new RecipeActions.FetchRecipes());
     }
 
     onLogOut(){
