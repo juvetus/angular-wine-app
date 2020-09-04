@@ -1,10 +1,10 @@
-# A Single Page Front end application built using Angular
+# A Single Page Front-end app built using Angular
 
 
 Description
 =======
 
-The application is a simple front-end application that allows users to create list of recipies, ingredients and save it on a database. It is a single page application build using [Angular](https://angular.io/) that uses [Firebase](https://firebase.google.com/) for saving the user data. The template makes use of Docker to create containers for developmet.
+This is a simple front-end application that allows users to create list of recipies, ingredients and save it on a database. It is a single page application build using [Angular](https://angular.io/) that uses [Firebase](https://firebase.google.com/) for saving the user data.
 
 The application uses [Bootstrap4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) for styling components and [NgRx](https://ngrx.io/guide/effects) for application state management.
 
