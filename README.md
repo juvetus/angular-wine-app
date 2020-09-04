@@ -1,13 +1,32 @@
-# Angular SPA For adding, updating recipes for users.A shopping list cart to buy ingredients of recipes .
+# A Single Page Front end application built using Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.4.
+
+Description
+=======
+
+The application is a simple front-end application that allows users to create list of recipies, ingredients and save it on a database. It is a single page application build using [Angular](https://angular.io/) that uses [Firebase](https://firebase.google.com/) for saving the user data. The template makes use of Docker to create containers for developmet.
+
+The application uses [Bootstrap4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) for styling components and [NgRx](https://ngrx.io/guide/effects) for application state management.
 
 > [Demo](https://recipeapp-c6b15.web.app) 
 
-## Development server
+## Usage
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Download the repository:
+```
+$ git clone https://github.com/ashok-kavungal/Angular-recipe-app.git
+```
 
+Init project:
+```
+$ cd Angular-recipe-app
+$ npm install
+```
+Launch:
+```
+$ ng serve
+```
+Navigate to `http://localhost:4200/` on browser. The app will automatically reload if you change any of the source files.
 
 ## Screenshots 
 
